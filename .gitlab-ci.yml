@@ -1,0 +1,43 @@
+stages:
+  - test
+  - deploy
+
+test:
+  tags:
+    - docker
+  stage: test
+  image: davlord/naemon
+  variables:
+    EMAIL_SENDER: "paglipay@gmail.com"
+  script:
+    - echo "Testing App"
+    # - npm install
+    # - CI=true npm test
+    # - echo "Test successfully!"
+
+deploy:
+  tags:
+    - docker
+  stage: deploy
+  # image: buildo/alpine-ssh
+  image: kroniak/ssh-client
+  # image: node:12.16.1
+  before_script:
+    - echo "deploying app"
+  script:
+    # - chmod 400 $SSH_PRIVATE_KEY    
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY vagrant@$192.168.2.81 "ls -la"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker pull registry.gitlab.com/alfredomartinezzz/budgefy"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker stop budgefycontainer || true && docker rm budgefycontainer || true"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker run -p 3001:80 -d --name budgefycontainer registry.gitlab.com/alfredomartinezzz/budgefy"
+    
+    - pwd
+    - ls -la
+    # - cat "$SSH_PRIVATE_KEY"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY paul@$192.168.2.215 "sudo docker service ls"
+    # - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > key.pem
+    # - chmod 400 key.pem
+    # - chmod 400 $SSH_PRIVATE_KEY
+    # - ssh -o StrictHostKeyChecking=no -i key.pem vagrant@$192.168.2.81 "sudo docker service ls"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker stop budgefycontainer || true && docker rm budgefycontainer || true"
+    # - ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY root@$PROD_SERVER_IP "docker run -p 3001:80 -d --name budgefycontainer registry.gitlab.com/alfredomartinezzz/budgefy"
